@@ -35,6 +35,9 @@ module.exports = function Middlewares(app) {
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
+    cookie: {
+      secure: true,
+    }
   }));
 
   // Use CSRF protection
