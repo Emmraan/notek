@@ -2,7 +2,7 @@ const User = require("../models/userModel");
 const bcrypt = require("bcrypt");
 
 const updateChecks = async (req, res) => {
-    const { username, firstName, lastName, email, current_password, new_password } = req.body;
+    const { firstName, lastName, email, current_password, new_password } = req.body;
   
     try {
       const user = await User.findById(req.user.id);
@@ -28,18 +28,10 @@ const updateChecks = async (req, res) => {
         user.password = await bcrypt.hash(new_password, 10);
       }
   
-
-      if (username && username !== user.username) {
-        const existingUser = await User.findOne({ username });
-        if (existingUser) {
-          return res.status(400).json({ message: "Username already taken" });
-        }
-        user.username = username;
-      }
   
 
       if (email && email !== user.email) {
-        const existingEmail = await User.findOne({ email });
+        const existingEmail = await User.findOne({ email: { $eq: email } });
         if (existingEmail) {
           return res.status(400).json({ message: "This email is already taken" });
         }

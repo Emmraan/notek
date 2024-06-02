@@ -36,7 +36,7 @@ const loginUser = async (req, res) => {
 
   try {
     
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email: { $eq: email } });
 
     if (!user) {
       return res.status(401).redirect("/login?error=Email or password are incorrect.");

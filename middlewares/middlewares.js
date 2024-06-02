@@ -1,7 +1,8 @@
 const express = require("express");
-const RateLimit = require("express-rate-limit");
 const path = require("path");
 const cookieParser = require('cookie-parser');
+const RateLimit = require("express-rate-limit");
+const lusca = require('lusca');
 
 // Define middleware functions
 const urlencodedParser = express.urlencoded({ extended: true });
@@ -27,5 +28,8 @@ module.exports = function Middlewares(app) {
 
   // Use rate limiter
   app.use(limiter);
+
+    // Use CSRF protection
+  app.use(lusca.csrf());
 
 };

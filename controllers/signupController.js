@@ -40,7 +40,7 @@ const signUpChecks = async (req, res) => {
 
 
 
-    const existingEmail = await User.findOne({ email });
+    const existingEmail = await User.findOne({ email: { $eq: email } });
     if (existingEmail) {
 
       return res.status(400).redirect("/register?error=This Email is already taken");
@@ -142,9 +142,9 @@ const verifyEmail = async (req, res) => {
 
 
     const user = await User.findOne({
-      verificationToken: token,
+      verificationToken: { $eq: token },
       verificationTokenExpires: { $gt: Date.now() },
-    });
+    });    
 
 
 
