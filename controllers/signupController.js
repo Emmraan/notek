@@ -26,23 +26,17 @@ const signUpChecks = async (req, res) => {
 
     }
 
-    const acceptedDomains = ["gmail.com","hotmail.com","outlook.com","yahoo.com",];
 
+    const acceptedDomains = ["gmail.com", "hotmail.com", "outlook.com", "yahoo.com"];
     const getEmailDomain = (email) => {
-
-      email.substring(email.lastIndexOf("@") + 1);
-      
-    } 
-      
-      
-
-    const domain = getEmailDomain(email);
-
-    if (!acceptedDomains.includes(domain)) {
-
-      return res.status(400).redirect(`/register?error=We accept emails only from these domains: ${acceptedDomains.join(", ")}`);
-
+      return email.substring(email.lastIndexOf("@") + 1);
     }
+    
+    const domain = getEmailDomain(email);
+    if (!acceptedDomains.includes(domain)) {
+      return res.status(400).redirect(`/register?error=We accept emails only from these domains: ${acceptedDomains.join(", ")}`);
+    }
+    
 
 
 
