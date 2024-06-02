@@ -1,6 +1,6 @@
 {
   "name": "notek",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "A web app for note taking.",
   "main": "index.js",
   "scripts": {

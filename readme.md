@@ -1,11 +1,8 @@
 # NOTEK : A web app for note taking.
 <br/>
-<br/>
-<br/>
+
 
 # BUILD WITH: MEEN --> MongoDB, EXPRESS, EJS, NODE.JS
-<br/>
-<br/>
 <br/>
 
 # Features:
@@ -18,8 +15,6 @@
 
 ## Email Verification During Signup
 
-<br/>
-<br/>
 <br/>
 
 
@@ -34,8 +29,6 @@
 <img src="./public/images/preview3.png" alt="HomelogOut">
 
 <br/>
-<br/>
-<br/>
 
 # Running the Project Locally
 ### To run this project on your local system, setup few things before cloning the repo!:
@@ -48,8 +41,6 @@
 #### Note: 2-Step verification must be enabled on your Gmail account; otherwise, you will not be able to create an app password.
 
 <br/>
-<br/>
-<br/>
 
 # Database Connection
 
@@ -61,8 +52,6 @@
 
 ### 3. Copy the MONGODB_URI and save it. This will be used to store our user information.
 
-<br/>
-<br/>
 <br/>
 
 # Installation
@@ -83,8 +72,6 @@ cd  notek
 ```bash
 npm install
 ```
-<br/>
-<br/>
 <br/>
 
 # Setting Up Environment Variables
@@ -116,7 +103,10 @@ In the .env file, use the following format:
 
 # This domain is attached before email_verify route!
 # For development purposes, use: localhost:3000
-6. DOMAIN= <here your domain> 
+6. DOMAIN= <here your domain>
+
+# session secrect same like jwt secrect
+7. SESSION_SECRET=your_session_seceret_here
 
 ```
 
@@ -129,9 +119,6 @@ npm run dev
 ### Accessing the Server On 🌐 http://localhost:3000
 
 <br/>
-<br/>
-<br/>
-
 
 # Want to run it in a Docker container?
 ### Note: Make sure .env file is setup in your root directory before build the docker image, and <a href="https://docker.com">DOCKER</a> installed in your system!
