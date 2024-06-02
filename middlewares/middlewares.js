@@ -2,6 +2,7 @@ const express = require("express");
 const path = require("path");
 const cookieParser = require('cookie-parser');
 const RateLimit = require("express-rate-limit");
+const session = require('express-session');
 const lusca = require('lusca');
 
 // Define middleware functions
@@ -29,7 +30,14 @@ module.exports = function Middlewares(app) {
   // Use rate limiter
   app.use(limiter);
 
-    // Use CSRF protection
+  // Set up session middleware
+  app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true,
+  }));
+
+  // Use CSRF protection
   app.use(lusca.csrf());
 
 };
