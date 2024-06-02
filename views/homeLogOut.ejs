@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Notek</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link rel="stylesheet" href="/stylesheets/custom.css" />
+  </head>
+  <body>
+
+    <div
+      class="main relative overflow-hidden w-full h-screen text-white bg-black z-50"
+    >
+      <nav
+        class="w-full fixed h-20 flex px-6 items-center justify-between border-b border-zinc-700 sm:border-zinc-900  z-50">
+        <a href="/">
+          <h1
+            class="notek text-4xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-5xl 2xl:text-6xl font-medium text-pink-600 shadow-white"
+          >
+            Notek
+          </h1>
+        </a>
+
+        <div class="menu-btn sm:hidden block">
+          <i class="ri-menu-3-line text-3xl"></i>
+        </div>
+
+        <div class="navlink sm:flex gap-6 hidden">
+          <a
+            href="/login"
+            class="py-2 px-4 bg-white hover:text-white text-black rounded-md font-medium hover:bg-black shadow-white"
+            >login</a
+          >
+          <a
+            href="/register"
+            class="py-2 px-4 bg-white hover:text-white text-black rounded-md font-medium hover:bg-black shadow-white"
+            >Sign up</a
+          >
+        </div>
+      </nav>
+
+      <div
+        class="menu-list border border-zinc-700 sm:hidden flex flex-col gap-6 absolute w-44 h-64 rounded-md top-[5%] -right-[100%] py-20 justify-start z-20">
+        <a
+          href="/login"
+          class="py-2 px-4 underline text-2xl text-white rounded-sm font-medium"
+          >Login</a
+        >
+        <a
+          href="/register"
+          class="py-2 px-4 underline text-2xl text-white rounded-sm font-medium"
+          >Sign up</a
+        >
+      </div>
+
+      <div class="head-gradient absolute top-[38%] left-[0%] sm:left-[24%] w-[30rem] h-[16rem]  sm:w-[50rem] sm:h-[10rem] rounded-full z-0"></div>
+      
+      <section class="mid-section w-full h-[95vh] sm:h-[92vh] flex items-start px-6 sm:px-6 ">
+
+        <div class="details flex flex-col gap-6 mt-[7rem] sm:mt-[10rem] sm:items-center z-10">
+
+            <h1 class="text-4xl sm:text-3xl md:text-5xl leading-[1.2] tracking-tighter sm:font-semibold md:font-bold font-bold">
+                <span>Notek: Ignite Your Ideas,</span> 
+                <span class="text-green-700">Organize Your Thoughts</span> 
+            </h1>
+
+                <p class="from-neutral-400 text-base sm:text-base md:text-xl xl:w-[67%] w-[100%] leading-[2] sm:leading-[1.6] md:leading-[2]"> <span class="text-cyan-500">NOTEK is your ultimate companion for capturing, organizing, and refining your thoughts effortlessly. </span>  
+               With intuitive features and seamless synchronization across devices, unleash your creativity and stay productive wherever you go.
+                </p>
+
+                <a href="/register"
+                class="flex justify-center"
+                >
+                <button class=" sm:ml-0 sm:py-3 py-2 px-4 bg-white hover:text-white text-black rounded-md  font-medium hover:bg-black shadow-white">Get Started</button>
+                </a>
+
+        </div>
+
+      </section>
+
+      <footer class="w-full relative sm:h-12 flex gap-5 justify-center items-center">
+
+        <h5 class="text-[1.3rem] sm:text-xl font-medium">© 2024 NOTEK</h5>
+        <a target="_blank" href="https://github.com/Emmraan/notek">
+            <i class="ri-github-fill text-2xl sm:text-2xl shadow-white"></i>
+        </a>
+        <a target="_blank" href="https://www.linkedin.com/in/md-emran-79302b2b1/">
+            <i class="ri-linkedin-box-fill text-2xl sm:text-2xl shadow-white"></i>
+          </a>
+      </footer> 
+      
+    </div>
+
+    <script src="/javascripts/script.js"></script>
+  </body>
+</html>

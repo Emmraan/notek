@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link rel="stylesheet" href="/stylesheets/custom.css" />
+  </head>
+  <body>
+    <div
+      class="main relative overflow-hidden w-full h-screen text-white bg-black z-50"
+    >
+      <nav
+        class="w-full fixed h-20 flex px-6 items-center justify-between border-b border-zinc-900 z-50">
+        <a href="/">
+          <h1
+            class="notek text-4xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-5xl 2xl:text-6xl font-medium text-pink-600 shadow-white"
+          >
+            Notek
+          </h1>
+        </a>
+
+        <div class="navlink flex gap-6"> 
+          <a
+            href="/login"
+            class="py-2 px-6 bg-white hover:text-white text-black rounded-md font-medium hover:bg-black shadow-white"
+            >Login</a
+          >
+        </div>
+      </nav>
+      
+      <div class="head-gradient absolute top-[38%] left-[0%] sm:left-[24%]  w-[50rem] h-[10rem] rounded-full -z-10"></div>
+      
+      <div class="form-container w-full h-[83vh] flex  items-center justify-center mt-[4rem]">
+
+        <div class="form-div relative w-[40rem] h-[25rem] flex px-6 items-center justify-center text-white bg-black rounded-md border">
+
+            <form action="/user/register" method="post" class="flex flex-wrap justify-center gap-10">
+
+            <input
+              type="text"
+              required="true"
+              name="firstName"
+              autocomplete="off"
+              placeholder="Enter your firstName"
+              class="text-white w-[12rem] sm:w-[14rem] py-1 sm:py-2 px-3 font-medium bg-transparent outline-none rounded-md 
+              bg-zinc-900 border-b-4 border-zinc-400"
+            />
+            
+            
+            <input
+              type="text"
+              name="lastName"
+              autocomplete="off"
+              placeholder="Enter your lastName"
+              class="text-white w-[12rem] sm:w-[14rem] py-1 sm:py-2 px-3 font-medium bg-transparent outline-none rounded-md bg-zinc-900 border-b-4 border-zinc-400"
+            />
+            
+           
+            <input
+              type="email"
+              required="true"
+              name="email"
+              autocomplete="off"
+              placeholder="Enter your Email"
+              class="text-white w-[12rem] sm:w-[14rem] py-1 sm:py-2 px-3 font-medium bg-transparent outline-none rounded-md 
+              bg-zinc-900 border-b-4 border-zinc-400"
+            />
+            
+            
+            <input
+              type="password"
+              required="true"
+              name="password"
+              placeholder="Enter your password"
+              class="text-white w-[12rem] sm:w-[14rem] py-1 sm:py-2 px-3 font-medium bg-transparent outline-none rounded-md 
+              bg-zinc-900 border-b-4 border-zinc-400"
+            />
+            <button class="px-10 py-2 text-[1rem] font-medium text-xl sm:text-[1.3rem] bg-white hover:bg-zinc-400 text-black rounded-md">Sign Up</button>
+            <div class="error w-full flex justify-center px-10">
+              <h5 class="text-[13px] sm:text-[14px] text-red-700"> <%= error %> </h5>
+            </div>
+          </form>
+
+        </div>
+
+      </div>
+
+      <footer class="w-full relative h-14 flex gap-5 px-5 justify-center items-center">
+
+        <h5 class="text-[1.3rem] sm:text-xl font-medium">© 2024 NOTEK</h5>
+        <a target="_blank" href="https://github.com/notek">
+            <i class="ri-github-fill text-2xl sm:text-2xl shadow-white"></i>
+        </a>
+        <a target="_blank" href="https://www.linkedin.com/in/md-emran-79302b2b1/">
+            <i class="ri-linkedin-box-fill text-2xl sm:text-2xl shadow-white"></i>
+          </a>
+      </footer> 
+
+    </div>
+
+    <script src="/javascripts/script.js"></script>
+  </body>
+</html>

@@ -1,12 +1,11 @@
 const express = require("express");
 const RateLimit = require("express-rate-limit");
 const path = require("path");
-const cors = require('cors');
+const cookieParser = require('cookie-parser');
 
 // Define middleware functions
 const urlencodedParser = express.urlencoded({ extended: true });
 const jsonParser = express.json();
-const CORS = cors();
 const staticFiles = express.static(path.join(__dirname, "../public"));
 
 // Set up rate limiter: maximum of 100 requests per 15 minutes
@@ -17,6 +16,7 @@ const limiter = RateLimit({
 
 
 module.exports = function Middlewares(app) {
+  app.use(cookieParser());
   app.use(urlencodedParser);
   app.use(jsonParser);
   app.use(staticFiles);
@@ -28,5 +28,4 @@ module.exports = function Middlewares(app) {
   // Use rate limiter
   app.use(limiter);
 
-  app.use(CORS);
 };

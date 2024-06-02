@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <% if (locals.error) { %>
+      <title> <%= error %> </title>
+      <% } %> 
+
+      <% if (locals.message) { %>
+        <title> <%= message %> </title>
+        <% } %>
+
+      <% if (locals.redirectMessage) { %>
+        <title> <%= redirectMessage %> </title>
+        <% } %>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link rel="stylesheet" href="/stylesheets/custom.css" />
+  </head>
+  <body>
+    <div
+      class="main relative overflow-hidden w-full h-screen text-white bg-black z-50"
+    >
+      <nav
+        class="w-full fixed h-20 flex px-6 items-center justify-between border-b border-zinc-900 z-50"
+      >
+        <a href="/">
+          <h1
+            class="notek text-4xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-5xl 2xl:text-6xl font-medium text-pink-600 shadow-white"
+          >
+            Notek
+          </h1>
+        </a>
+
+        <div class="navlink flex gap-6">
+          <a
+            href="/user/logout"
+            class="py-2 px-4 bg-white hover:text-white text-black rounded-md font-medium hover:bg-black shadow-white"
+            >Logout</a
+          >
+        </div>
+      </nav>
+
+      <div
+        class="head-gradient absolute top-[38%] left-[0%] sm:left-[24%] w-[50rem] h-[10rem] rounded-full -z-10">
+      </div>
+
+      <div
+        class="form-container w-full h-[83vh] flex items-center justify-center mt-[4rem]">
+        <div
+          class="form-div relative w-[40rem] h-[25rem] flex px-6 items-center justify-center text-white bg-black rounded-md border"
+        >
+          <div class="flex flex-col justify-center gap-8">
+            <% if (locals.error) { %>
+
+            <h5 class="text-xl text-white"><%= error %></h5>
+            <a href="/user/resend-link" class="flex justify-center">
+              <button
+                class="resend-btn px-4 py-2 font-medium text-xl bg-white hover:bg-zinc-400 text-black rounded-md"
+              >
+                Resend
+              </button>
+            </a>
+            <% } %> 
+
+            <% if (locals.message) { %>
+            <h5 class="text-xl text-white"><%= message %></h5>
+            <a href="/user/resend-link" class="flex justify-center">
+              <button
+                class="resend-btn px-4 py-2 font-medium text-xl bg-white hover:bg-zinc-400 text-black rounded-md"
+              >
+                Resend
+              </button>
+            </a>
+            <% } %>
+            
+            <% if (locals.redirectMessage) { %>
+            <h5 class="text-xl text-white"><%= redirectMessage %></h5>
+            <a href="/" class="flex justify-center">
+              <button
+                class="resend-btn px-4 py-2 font-medium text-xl bg-white hover:bg-zinc-400 text-black rounded-md"
+              >
+                Go Home
+              </button>
+            </a>
+            <% } %>
+          </div>
+        </div>
+      </div>
+      
+      <footer
+        class="w-full relative h-14 flex gap-5 px-5 justify-center items-center"
+      >
+        <h5 class="text-[1.3rem] sm:text-xl font-medium">© 2024 NOTEK</h5>
+        <a target="_blank" href="https://github.com/Emmraan/notek">
+          <i class="ri-github-fill text-2xl sm:text-2xl shadow-white"></i>
+        </a>
+        <a
+          target="_blank"
+          href="https://www.linkedin.com/in/md-emran-79302b2b1/"
+        >
+          <i class="ri-linkedin-box-fill text-2xl sm:text-2xl shadow-white"></i>
+        </a>
+      </footer>
+    </div>
+
+    <script src="/javascripts/script.js"></script>
+  </body>
+</html>

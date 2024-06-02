@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link rel="stylesheet" href="/stylesheets/custom.css" />
+  </head>
+  <body>
+    <div
+      class="main relative overflow-hidden w-full h-screen text-white bg-black z-50"
+    >
+      <nav
+        class="w-full fixed h-20 flex px-6 items-center justify-between border-b border-zinc-900 z-50">
+        <a href="/">
+          <h1
+            class="notek text-4xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-5xl 2xl:text-6xl font-medium text-pink-600 shadow-white"
+          >
+            Notek
+          </h1>
+        </a>
+
+        <div class="navlink flex gap-6"> 
+          <a
+            href="/register"
+            class="py-2 px-4 bg-white hover:text-white text-black rounded-md font-medium hover:bg-black shadow-white"
+            >Sign up</a
+          >
+        </div>
+      </nav>
+      
+
+      <div class="head-gradient absolute top-[38%] left-[0%] sm:left-[24%]  w-[50rem] h-[10rem] rounded-full -z-10"></div>
+      
+
+      <div class="form-container w-full h-[83vh] flex items-center justify-center mt-[4rem]">
+
+        <div class="form-div relative w-[40rem] h-[25rem] flex flex-col gap-6 px-6 items-center justify-center text-white bg-black rounded-md border">
+
+            <form action="/user/login" method="post" class="flex flex-col justify-center gap-8">
+            <div class="email">
+            <h4 class="text-[15px] mb-2">Enter your Email</h4>
+            <input
+              type="email"
+              required="true"
+              name="email"
+              autocomplete="off"
+              placeholder="email"
+              class="text-white text-base font-medium bg-transparent outline-none border-b-4 border-zinc-400 rounded-md py-2 px-3
+              bg-zinc-900"
+            />
+            
+            </div>
+
+            <div class="pass">
+              <h4 class="text-[15px] mb-2">Enter your password</h4>
+            <input
+              type="password"
+              required="true"
+              name="password"
+              placeholder="password"
+              class="text-white font-medium bg-transparent outline-none border-b-4 border-zinc-400 rounded-md py-2 px-3
+              bg-zinc-900"
+            />
+            </div>
+            <button class="px-2 py-1 font-medium text-xl bg-white hover:bg-zinc-400 text-black rounded-md">Login</button>
+          </form>
+          <div class="error flex justify-center px-10">
+            <h5 class="text-[13px] sm:text-[14px] text-red-700"> <%= error %> </h5>
+          </div>
+        </div>
+
+      </div>
+
+      <footer class="w-full relative h-14 flex gap-5 px-5 justify-center items-center">
+
+        <h5 class="text-[1.3rem] sm:text-xl font-medium">© 2024 NOTEK</h5>
+        <a target="_blank" href="https://github.com/Emmraan/notek">
+            <i class="ri-github-fill text-2xl sm:text-2xl shadow-white"></i>
+        </a>
+        <a target="_blank" href="https://www.linkedin.com/in/md-emran-79302b2b1/">
+            <i class="ri-linkedin-box-fill text-2xl sm:text-2xl shadow-white"></i>
+          </a>
+      </footer> 
+
+    </div>
+
+    <script src="/javascripts/script.js"></script>
+  </body>
+</html>

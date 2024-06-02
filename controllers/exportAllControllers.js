@@ -1,13 +1,14 @@
-const { createUser, loginUser,getUserById } = require("./userController");
-const { createNote,updateNote,deleteNote,readNote,allNotes } = require("./noteController");
+const { createUser,updateUser, loginUser,logoutUser,getUser } = require("./userController");
+const { createNote,updateNote,deleteNote,allNotes } = require("./noteController");
 
 module.exports = {
   createUser,
+  updateUser,
   loginUser,
+  logoutUser,
   createNote,
-  getUserById,
+  getUser,
   updateNote,
   deleteNote,
-  readNote,
   allNotes
 };

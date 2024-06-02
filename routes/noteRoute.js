@@ -1,20 +1,18 @@
 const express = require("express");
-const authenticator = require("../middlewares/authUser")
-const { createNote,updateNote,deleteNote,readNote,allNotes } = require("../controllers/exportAllControllers");
+const isLoggedIn = require("../middlewares/isLoggedIn");
+const userAuthen = require("../middlewares/userAuthen.js");
+const { createNote,updateNote,deleteNote} = require("../controllers/exportAllControllers");
 
 const Router = express.Router();
 
-Router.use(authenticator);
+Router.use(isLoggedIn,userAuthen);
 
 Router
-      .get("/", allNotes)
-
+      
       .post("/create", createNote)
-
-      .get("/read/:noteId", readNote)
 
       .post("/update/:noteId", updateNote)
 
-      .post("/delete/:noteId", deleteNote)
+      .get("/delete/:index/:noteId", deleteNote)
 
 module.exports = Router;

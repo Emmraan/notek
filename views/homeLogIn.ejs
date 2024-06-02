@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home | Notes</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link rel="stylesheet" href="/stylesheets/custom.css" />
+  </head>
+  <body>
+
+    <div
+      class="main relative overflow-hidden w-full h-screen text-white bg-black z-50">
+      <nav
+        class="w-full bg-blur fixed h-20 flex px-6 items-center justify-between border-b border-zinc-900  z-50">
+        <a href="/">
+          <h1
+            class="notek text-4xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-5xl 2xl:text-6xl font-medium text-pink-600 shadow-white"
+          >
+            Notek
+          </h1>
+        </a>
+
+        <div class="menu-btn sm:hidden block">
+          <i class="ri-menu-3-line text-3xl"></i>
+        </div>
+        
+        <div class="user-icon select-none sm:flex hidden w-[2.6rem] h-[2.6rem] text-black hover:text-white hover:bg-black items-center justify-center font-bold bg-white rounded-full shadow-white cursor-pointer">
+          <%= user.firstName.charAt(0).toUpperCase() + user.lastName.charAt(0).toUpperCase() %>
+        </div>
+        
+      
+      </nav>
+      
+      <div class="menu-list border border-zinc-700 bg-blur transition-1s select-none flex flex-col gap-2 absolute w-44 h-64 rounded-md top-[5%] -right-[100%] py-20 justify-start z-20">
+        <a
+          href="/user/account"
+          class="py-2 px-4 text-xl underline text-white rounded-sm font-medium"
+          >Account</a
+        >
+        <div class="note-btn-1 sm:hidden w-[3rem] h-[3rem] sm:w-[2.8rem] sm:h-[2.8rem] flex items-center justify-center rounded-full bg-white hover:bg-black  hover:text-white text-black boxs absolute bottom-5 right-10 sm:bottom-3  shadow-white cursor-pointer">
+          <h1 class="text-3xl sm:text-2xl font-bold"><i class="ri-add-fill"></i></h1>
+          </div>
+        <a
+          
+          class="logout py-2 px-4 text-xl underline text-white rounded-sm font-medium cursor-pointer"
+          >LogOut</a
+        >
+      </div>
+
+      <div class="head-gradient absolute top-[38%] left-[0%] sm:left-[24%]  w-[50rem] h-[10rem] rounded-full -z-10"></div>
+      
+      <div class="note-create-div bg-b-light  transition-1s absolute flex items-center justify-center  w-full h-[45em] opacity-0 pointer-events-none z-20">
+        <div class="close-btn absolute px-8 py-4 sm:top-[12%] top-[10%] left-[80%] text-2xl sm:text-4xl text-white cursor-pointer">
+            <h3 class="close-info transition-1s absolute top-0 left-0 opacity-0 text-base font-medium">Close</h3>
+            <i class="ri-close-large-fill"></i> 
+        </div>
+        <div class="creation-div relative flex justify-center w-[98vw] sm:w-[47vw] h-[26rem] rounded-md border border-zinc-800 bg-black">
+          
+          <form action="/note/create" method="post" class="flex flex-col gap-2 mt-4"> 
+
+              <label for="title">Title</label>
+                <input 
+                type="text" 
+                required="true"
+                id="title"
+                name="title" 
+                placeholder="Enter your title"
+                class="text-white w-[89vw] sm:w-[35vw]  bg-zinc-600 font-medium bg-transparent outline-none rounded-md py-2 px-3"
+                >
+                <label for="body">Description</label>
+                <textarea 
+                required="true"
+                name="body" 
+                id="body" 
+                placeholder="Enter your description"
+                class="bg-zinc-600 scroll-w-0 font-medium outline-none rounded-md px-3 py-2  h-[12rem] resize-none">
+              </textarea>     
+              <button type="submit" class="font-medium absolute translate-x-[-50%] translate-y-[-50%] bottom-[-2%] left-[50%] rounded-md px-5 py-3  text-xl text-black bg-white ">Create</button>         
+            </form>
+        </div>
+      </div>
+
+      <div class="note-update-div bg-b-light  transition-1s absolute flex items-center justify-center  w-full h-[45em] opacity-0 pointer-events-none z-20">
+        <div class="close-btn2 absolute px-8 py-4 sm:top-[12%] top-[10%] left-[80%] text-2xl sm:text-4xl text-white cursor-pointer">
+            <h3 class="close-info2 absolute top-0 left-0 opacity-0 text-base font-medium">Close</h3>
+            <i class="ri-close-large-fill"></i> 
+        </div>
+        <div class="updation-div relative flex justify-center w-[98vw] sm:w-[47vw] h-[26rem]  rounded-md border border-zinc-800 bg-black">
+          
+         
+          <form method="post" class="update-form">
+               <div class="update-content flex flex-col gap-2 mt-4">
+
+              <label for="title">Title</label>
+                <textarea 
+                type="text" 
+                required="true"
+                id="title"
+                name="title" 
+                placeholder="Enter your title"
+                class="update-title w-[89vw] sm:w-[35vw] bg-zinc-600 font-medium outline-none rounded-md px-3 py-2  h-[2.5rem] resize-none">
+              </textarea> 
+              
+                <label for="body">Description</label>
+                <textarea 
+                required="true"
+                name="body"
+                id="body-update" 
+                placeholder="Enter your description"
+                class="update-body scroll-w-0 w-[89vw] sm:w-[35vw] bg-zinc-600 font-medium outline-none rounded-md px-3 py-2  h-[12rem] resize-none">
+              </textarea>     
+              <button type="submit" class="update-btn font-medium absolute translate-x-[-50%] translate-y-[-50%] bottom-[-2%] left-[50%] rounded-md px-5 py-3 text-xl text-black bg-white ">Update</button>         
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="note-delete-conform bg-b-light  transition-1s  absolute flex items-center justify-center  w-full h-full opacity-0 pointer-events-none z-20">
+        <div class="note-delete-div w-[35rem] h-[20rem] flex flex-col px-12 gap-12 items-center justify-center rounded-md border border-zinc-700 bg-black text-white ">
+          <h1 class="text-xl font-medium">Are you sure you want to delete this note?</h1>
+             
+              <div class="delete-btns flex gap-6">
+                <button type="button" class="cancel text-base px-4 py-2 bg-white hover:bg-zinc-500 text-black rounded-md font-medium">Cancel</button>
+                <button type="button" class="confirm-delete text-base px-4 py-2 bg-red-600 hover:bg-red-800 rounded-md font-medium">Delete</button>
+
+              </div>
+        </div>
+      </div>
+
+      <div class="note-viewer-container transition-1s pointer-events-none opacity-0 absolute w-full h-screen flex items-end sm:justify-center z-20 bg-black">
+
+        <div class="notes-content relative sm:w-[70rem] w-full h-[90%] py-10 px-4 overflow-hidden ">
+            <h1 id="backBtn" class="text-white cursor-pointer sm:text-3xl text-4xl mb-6">
+              <i class="ri-arrow-left-wide-line"></i>
+            </h1>
+          <strong class="text-2xl sm:text-4xl font-semibold">Title:</strong> 
+         
+            <span class="view-title text-base sm:text-xl font-medium ml-4"></span>
+          
+          <h1 class="mt-10 font-semibold text-2xl sm:text-4xl">Description:</h1>
+          <div class="w-full h-[20em] mt-4 rounded-md font-thin px-4 border border-zinc-700 text-white bg-black">
+            <textarea  id="view-content" readonly="true" class="view-content scroll-w-0 w-full h-full bg-black outline-none resize-none overflow-y-auto sm:py-4 py-8"></textarea>
+          </div>
+        </div>
+      </div>
+    
+      <div class="note-div scroll-w-0 flex flex-wrap gap-10 sm:gap-[7rem] justify-center w-full h-[93vh] overflow-y-auto py-[7rem] sm:px-0 z-10">
+
+          <% if (notes.length === 0) { %>
+              <h1 class="text-2xl font-bold text-zinc-600 absolute top-[50%] sm:left-[40%] left-[20%]">You have no any notes!</h1>
+          <% } %>
+          
+        <% notes.forEach((note,index) => { %>
+          <div class="note-card scroll-w-0 select-none relative w-[15rem] h-[5.1rem] flex gap-4 items-center px-4 rounded-md bg-black border border-white cursor-pointer">
+      
+            <div class="title-info transition-1s absolute left-[0%] top-[-40%] bg-white text-black rounded-md text-sm px-1 py-1 opacity-0 pointer-events-none">Double Click to View</div>
+            <div class="edit-btn absolute right-2 top-0 text-white hover:text-zinc-700" data-note-id="<%= note._id %>">
+              <i class="ri-edit-box-line"></i>
+            </div>
+            <div class="delete-btn absolute right-1 bottom-0 px-1 py-1 hover:text-red-800 text-red-600" data-note-id="<%= note._id %>">
+              <i class="ri-delete-bin-line"></i>
+            </div>
+            <strong>Title:</strong> 
+            <span class="title text-ellipsis overflow-hidden w-[70%]"> <%= note.title %> </span>
+            <span class="body text-ellipsis hidden"> <%= note.body %> </span>
+          </div>
+        <% }) %>
+      </div>
+
+      <footer class="sm:block  hidden">
+        <div class="note-info transition-1s opacity-0 pointer-events-none absolute bottom-20 right-24 font-medium px-1  py-1  rounded-md text-black bg-white">
+          Create new Note
+        </div>
+  
+        <div class="note-btn w-[2rem] h-[2rem] sm:w-[2.8rem] sm:h-[2.8rem] flex items-center justify-center rounded-full bg-white hover:bg-black  hover:text-white text-black boxs absolute bottom-5 right-10 sm:bottom-3  shadow-white cursor-pointer">
+        <h1 class="text-base sm:text-2xl font-bold"><i class="ri-add-fill"></i></h1>
+        </div>
+      </footer>
+
+    </div>
+
+    <script src="/javascripts/script.js"></script>
+  </body>
+</html>
