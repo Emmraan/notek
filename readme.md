@@ -102,7 +102,7 @@ In the .env file, use the following format:
 5. PASS= <here your app password>
 
 # This domain is attached before email_verify route!
-# For development purposes, use: localhost:3000
+# For development purposes, use: http://localhost:3000
 6. DOMAIN= <here your domain>
 
 # session secrect same like jwt secrect
@@ -118,6 +118,12 @@ npm run dev
 ### Server Auto-Restart with Nodemon 🔄
 ### Accessing the Server On 🌐 http://localhost:3000
 
+<br/>
+
+### After this enable Tailwind CSS to work without building it, open a new terminal and run the following command:
+```
+npm run watch:css
+```
 <br/>
 
 # Want to run it in a Docker container?
