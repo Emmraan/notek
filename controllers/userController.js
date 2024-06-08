@@ -6,7 +6,6 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
 const nodemailer = require("nodemailer");
-const ipInfo = require("ipinfo")
 
 const createUser = async (req, res) => {
   try {
@@ -33,7 +32,7 @@ const updateUser = async (req, res) => {
 const loginUser = async (req, res) => {
   const hostDomain = process.env.DOMAIN;
   const { email, password } = req.body;
-  const userIp = req.headers['x-forwarded-for'] || req.ip;
+  const userIp = req.socket.remoteAddress || '';
 
   if (!email || !password) {
     return res.status(400).redirect("/login?error=Email and password are required.");
@@ -60,24 +59,6 @@ const loginUser = async (req, res) => {
       user.ip = userIp; // Update the IP field with the new IP
       await user.save();
 
-      // Geolocation lookup
-     
-      let locationInfo = {};
-
-      try {
-        locationInfo = await new Promise((resolve, reject) => {
-          ipInfo(userIp, (err, cLoc) => {
-            if (err) reject(err);
-            resolve(cLoc);
-          });
-        });
-      } catch (err) {
-        console.error("Geolocation Error:", err);
-        // Fallback values if geolocation fails
-        locationInfo.country = "unknown country";
-        locationInfo.city = "unknown city";
-      }
-
       // Send verification email
       const transporter = nodemailer.createTransport({
         service: 'Gmail',
@@ -93,7 +74,7 @@ const loginUser = async (req, res) => {
         from: process.env.USER,
         to: user.email,
         subject: 'Security Alert!',
-        text: `New sign-in detected with IP: ${userIp} from ${locationInfo.city}, ${locationInfo.region} ,${locationInfo.country}. If this was not you, change your password immediately. If this was you, please verify your new IP address by copying and pasting the following link into your browser: ${verificationUrl}`
+        text: `New sign-in detected with IP: ${userIp}. If this was not you, change your password immediately. If this was you, please verify your new IP address by copying and pasting the following link into your browser: ${verificationUrl}`
       };
 
       await transporter.sendMail(mailOptions);
@@ -101,9 +82,7 @@ const loginUser = async (req, res) => {
       return res.status(200).redirect("/login?error=New IP detected! Check your email for an IP verification link.");
     } else {
       // IP is the same
-      const token = jwt.sign({ id: user._id, email: user.email }, process.env.JWT_SECRET, {
-        expiresIn: '6m' // Token expiration set to 6 months
-      });
+      const token = jwt.sign({ id: user._id, email: user.email }, process.env.JWT_SECRET);
 
       res.cookie('authen', token, {
         httpOnly: true,
@@ -131,7 +110,9 @@ const verifyIp = async (req,res) => {
   });
 
   if (!user) {
-    return res.status(401).send('Invalid or expired verification token');
+    return res.status(200).render("emailVerify",{
+      ipMessage: "Invalid or expired verification token"
+    });
   }
 
   // Update IP and clear verification token
