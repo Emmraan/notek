@@ -126,7 +126,7 @@ const verifyIp = async (req,res) => {
   const userIp = req.headers['x-forwarded-for'] || req.ip;
 
   const user = await User.findOne({
-    verificationToken: token,
+    verificationToken: { $eq: token },
     verificationTokenExpires: { $gt: Date.now() }
   });
 
