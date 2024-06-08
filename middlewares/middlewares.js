@@ -36,7 +36,7 @@ module.exports = function Middlewares(app) {
     resave: false,
     saveUninitialized: true,
     cookie: {
-      secure: true,
+      secure:false,
     }
   }));
 

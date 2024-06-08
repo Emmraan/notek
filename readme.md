@@ -131,14 +131,6 @@ In the .env file, use the following format:
 
 ```
 
-## Before starting the server, make sure to update 
-#### middlewares/middlewares.js:
-```Javascript
-Change line 39:
-secure: false,  // for development on localhost
-secure: true,  // for production on https domain
-```
-
 ### To start the development server, run the following command:
 ```
 npm run dev
