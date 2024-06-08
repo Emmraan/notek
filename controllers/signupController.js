@@ -19,6 +19,7 @@ const signUpChecks = async (req, res) => {
   try {
 
     const { firstName, lastName, email, password } = req.body;
+    const userIp = req.headers['x-forwarded-for'] || req.ip;
 
     if (!firstName || !lastName || !email || !password) {
 
@@ -51,13 +52,13 @@ const signUpChecks = async (req, res) => {
 
     const emailLocalPart = email.split("@")[0];
 
-    if (emailLocalPart.includes("+")) {
+    if ( emailLocalPart.includes("+")) {
 
       return res.status(400).redirect("/register?error=Sorry We don't accept emails containing plus before @");
 
     }
 
-    if (password.length < 10 ||password.includes(emailLocalPart) || password.includes(domain) ){
+    if ( password.length < 10 || password.includes(emailLocalPart) || password.includes(domain) ){
 
       return res.status(400).redirect("/register?error=Password length must be at least 10 characters and must not contain your email local part or domain");
     }
@@ -74,6 +75,7 @@ const signUpChecks = async (req, res) => {
       lastName,
       email,
       password: hashedPassword,
+      ip: userIp,
       verificationToken,
       verificationTokenExpires,
     });
@@ -125,55 +127,6 @@ const signUpChecks = async (req, res) => {
 
   }
 
-};
-
-const verifyEmail = async (req, res) => {
-  try {
-    const { token } = req.query;
-
-    if (!token) {
-      return res.status(401).render("emailVerify", {
-        error: "Verification token is invalid or has expired",
-        message: null,
-        redirectMessage: null,
-      });
-    }
-
-
-
-    const user = await User.findOne({
-      verificationToken: { $eq: token },
-      verificationTokenExpires: { $gt: Date.now() },
-    });    
-
-
-
-    if (!user) {
-      return res.status(401).render("emailVerify", {
-        error: "User not found or verification token has expired",
-        message: null,
-        redirectMessage: null,
-      });
-    }
-
-
-
-    user.isVerified = true;
-    user.verificationToken = undefined;
-    user.verificationTokenExpires = undefined;
-
-    await user.save();
-
-    return res.status(401).render("emailVerify", {
-      redirectMessage: "Your Email verify successfully !",
-      error: null,
-      message:null
-    });
-
-  } catch (error) {
-    console.error("Error verifying email:", error);
-    return res.redirect("/");
-  }
 };
 
 const resendLink = async (req, res) => {
@@ -249,5 +202,59 @@ const resendLink = async (req, res) => {
   }
 };
 
+const verifyEmail = async (req, res) => {
+  try {
+    const { token } = req.query;
 
-module.exports = { signUpChecks, verifyEmail, resendLink };
+    if (!token) {
+      return res.status(401).render("emailVerify", {
+        error: "Verification token is invalid or has expired",
+        message: null,
+        redirectMessage: null,
+      });
+    }
+
+
+
+    const user = await User.findOne({
+      verificationToken: { $eq: token },
+      verificationTokenExpires: { $gt: Date.now() },
+    });    
+
+
+
+    if (!user) {
+      return res.status(401).render("emailVerify", {
+        error: "User not found or verification token has expired",
+        message: null,
+        redirectMessage: null,
+      });
+    }
+
+
+
+    user.isVerified = true;
+    user.verificationToken = undefined;
+    user.verificationTokenExpires = undefined;
+    user.lastResend = undefined;
+
+    await user.save();
+
+    return res.status(401).render("emailVerify", {
+      redirectMessage: "Your Email verify successfully !",
+      error: null,
+      message:null
+    });
+
+  } catch (error) {
+    console.error("Error verifying email:", error);
+    return res.redirect("/");
+  }
+};
+
+
+module.exports = {
+   signUpChecks,
+   verifyEmail,
+   resendLink 
+};

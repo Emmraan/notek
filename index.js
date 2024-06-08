@@ -26,8 +26,9 @@ Middlewares(app);
 app.use("/", home);
 
 app.get("/login", isLoggedOut, (req, res) => {
+    const csrfToken = req.csrfToken(); // Generate CSRF token
     const error = req.query.error || null;
-    res.render("login", { error });
+    res.render("login", { error:error, csrfToken:csrfToken });
   });
 
 app.get("/register", isLoggedOut, (req, res) => {

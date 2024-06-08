@@ -2,14 +2,14 @@ function showAndHideUserMenu() {
   const userIcon = document.querySelector(".user-icon");
   const menuBtn = document.querySelector(".menu-btn");
   const menuList = document.querySelector(".menu-list");
-  
-  if (!userIcon) {
-    return null;
-  }
+
   let isOpen = false;
 
-  const toggleMenu = (event) => {
-    event.stopPropagation();
+  if (!menuBtn || !menuList) {
+    return;
+  }
+
+  const toggleMenu = () => {
     if (isOpen) {
       menuList.style.right = "-90%";
       isOpen = false;
@@ -21,22 +21,25 @@ function showAndHideUserMenu() {
   };
 
   menuBtn.addEventListener("click", toggleMenu);
-  userIcon.addEventListener("click", toggleMenu);
+
+  if (userIcon) {
+    userIcon.addEventListener("click", toggleMenu);
+  }
 
   document.addEventListener("click", (event) => {
     if (
       isOpen &&
       !menuList.contains(event.target) &&
       !menuBtn.contains(event.target) &&
-      !userIcon.contains(event.target)
+      (!userIcon || !userIcon.contains(event.target))
     ) {
       menuList.style.right = "-90%";
       isOpen = false;
     }
   });
 }
-showAndHideUserMenu();
 
+showAndHideUserMenu();
 
 function NoteCreation() {
   const noteBtn = document.querySelector(".note-btn");
@@ -301,3 +304,36 @@ function logOutUser () {
   });
 }
 logOutUser();
+
+function loginAndForgotForm () {
+  const forgotBtn = document.querySelector(".forgot-btn");
+  const loginBtn = document.querySelector(".login-btn");
+  const loginForm = document.querySelector(".login-form-div");
+  const resetPassForm = document.querySelector(".reset-pass-form-div");
+
+  if (!forgotBtn || !loginBtn) {
+    return null;
+  }
+
+  forgotBtn.addEventListener("click", () => {
+    loginForm.style.opacity = 0;
+    loginForm.style.pointerEvents = "none";
+    loginForm.style.position = "absolute";
+    resetPassForm.style.opacity = 1;
+    resetPassForm.style.pointerEvents = "all";
+    resetPassForm.style.position = "relative";
+  });
+
+  loginBtn.addEventListener("click", () => {
+    resetPassForm.style.opacity = 0;
+    resetPassForm.style.pointerEvents = "none"
+    resetPassForm.style.position = "absolute";
+    loginForm.style.opacity = 1;
+    loginForm.style.pointerEvents = "all";
+    loginForm.style.position = "relative";
+  });
+
+
+}
+
+loginAndForgotForm();

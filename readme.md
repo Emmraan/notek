@@ -1,31 +1,52 @@
-# NOTEK : A web app for note taking.
-<br/>
+## NOTEK: A Web App for Note Taking 📝
+
+## BUILD WITH: MEEN ==> MongoDB: 🍃, Express: 🚂, EJS: 📄, Node.js: 🟢
+
+| Technology | Description | Logo |
+|------------|-------------|-------|
+| **MongoDB** | NoSQL database for storing data. | <img src="https://w7.pngwing.com/pngs/489/225/png-transparent-mongodb-logo-black-tech-companies-thumbnail.png" alt="MongoDB" width="150px"/> |
+| **Express** | Web application framework for Node.js. | <img src="https://upload.wikimedia.org/wikipedia/commons/6/64/Expressjs.png" alt="Express" width="150px"/> |
+| **EJS** | Simple templating language that lets you generate HTML markup with plain JavaScript. | <img src="https://miro.medium.com/v2/resize:fit:1278/1*i-YOI4nMBnyPfjSulLxDLA.png" alt="EJS" width="150px"/> |
+| **Node.js** | JavaScript runtime built on Chrome's V8 JavaScript engine. | <img src="https://blog.4linux.com.br/wp-content/uploads/2019/12/node-js-1900x950_c.png" alt="Node.js" width="150px"/> |
 
 
-# BUILD WITH: MEEN --> MongoDB, EXPRESS, EJS, NODE.JS
-<br/>
+## Features:
 
-# Features:
+### CRUD OPERATIONS
+- Create: ✨
+- Read: 📖
+- Update: 🔄
+- Delete: 🗑️
 
-## CRUD OPERATIONS
-###  Create , Read , Update and Delete.
+### Styling
+- Tailwind CSS: 🎨
+- Responsive Design: 📱
 
-## Authentication
-### Login , Signup
+### Authentication
+- Login: 🔑
+- Signup: ✍️
+- Email Verification: 📧
+- Many Checks During Signup: ✅
 
-## Email Verification During Signup
+### Security
+- Protect Website from Disposable Email: 🚫✉️
+- Protect from (CSRF) Attack: 🛡️
+- Rate Limiting: ⏳
+- IP verification 🌐
 
-<br/>
+### Account Recovery
+- Reset Password
+- Change Email
 
+## SOME  PREVIEWS 👁️
 
-## SOME  PREVIEWS
-### HomeLogOut
+### HomeLogOut 🚪
 <img src="./public/images/preview1.png" alt="HomelogOut">
 
-### Home Login Blank
+### Home Login Blank 🔲
 <img src="./public/images/preview2.png" alt="HomelogOut">
 
-### Home Login With Note
+### Home Login 🔑 With Note 📝
 <img src="./public/images/preview3.png" alt="HomelogOut">
 
 <br/>
@@ -48,13 +69,13 @@
 
 ### 1. Go to <a href="https://cloud.mongodb.com/"> MongoDB Cloud.</a> If you do not have an account, create one.
 
-### 2. Create a database cluster. if you don't know how to create a cluster on MongodB then simply search on <a href="https://www.youtube.com/results?search_query=how+to+create+a+cluster+on+MongodB">Click Here</a>
+### 2. Create a database cluster. if you don't know how to create a cluster on MongoDB Atlas then simply search or <a href="https://www.youtube.com/results?search_query=how+to+create+a+cluster+on+MongodB">Click Here</a>
 
 ### 3. Copy the MONGODB_URI and save it. This will be used to store our user information.
 
 <br/>
 
-# Installation
+# Installation 🛠️
 
 1. Clone this repository to your local machine.
 
@@ -88,10 +109,10 @@ npm install
 In the .env file, use the following format:
 
 
-# Replace the username password and Database name.
+// Replace the username password and Database name.
 1. MONGO_URI="mongodb+srv://<username>:<password>@cluster0.4m7l6.mongodb.net/<yourDBname>?retryWrites=true&w=majority&appName=Cluster0"
 
-# Generate or create a long hex secret for JWT_SECRET, e.g., 7f45d1f47ebf4e1af1e148cd00fe97e5472df8e5b5c8e8af
+// Generate or create a long hex secret for JWT_SECRET, e.g., 7f45d1f47ebf4e1af1e148cd00fe97e5472df8e5b5c8e8af
 
 2. JWT_SECRET=your_jwt_seceret_here
 
@@ -101,15 +122,22 @@ In the .env file, use the following format:
 
 5. PASS= <here your app password>
 
-# This domain is attached before email_verify route!
-# For development purposes, use: http://localhost:3000
+// This domain is attached before email_verify route!
+// For development purposes, use: http://localhost:3000
 6. DOMAIN= <here your domain>
 
-# session secrect same like jwt secrect
+// session secrect same like jwt secrect
 7. SESSION_SECRET=your_session_seceret_here
 
 ```
 
+## Before starting the server, make sure to update 
+#### middlewares/middlewares.js:
+```Javascript
+Change line 39:
+secure: false,  // for development on localhost
+secure: true,  // for production on https domain
+```
 
 ### To start the development server, run the following command:
 ```
@@ -120,7 +148,7 @@ npm run dev
 
 <br/>
 
-### After this enable Tailwind CSS to work without building it, open a new terminal and run the following command:
+### Want Tailwind CSS to work without building it, open a new terminal and run the following command:
 ```
 npm run watch:css
 ```

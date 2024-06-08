@@ -1,6 +1,6 @@
 {
   "name": "notek",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "A web app for note taking.",
   "main": "index.js",
   "scripts": {
@@ -25,6 +25,7 @@
     "express": "^4.19.2",
     "express-rate-limit": "^7.2.0",
     "express-session": "^1.18.0",
+    "ipinfo": "^1.5.1",
     "jsonwebtoken": "^9.0.2",
     "lusca": "^1.7.0",
     "mongoose": "^8.4.0",

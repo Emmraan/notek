@@ -16,6 +16,10 @@
         <title> <%= redirectMessage %> </title>
         <% } %>
 
+      <% if (locals.forgotMessage) { %>
+          <title> <%= forgotMessage %> </title>
+        <% } %>
+
     <link
       href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css"
       rel="stylesheet"
@@ -40,11 +44,21 @@
         </a>
 
         <div class="navlink flex gap-6">
-          <a
+          <% if (!locals.forgotMessage) { %>
+            <a
             href="/user/logout"
             class="py-2 px-4 bg-white hover:text-white text-black rounded-md font-medium hover:bg-black shadow-white"
             >Logout</a
           >
+          <% } %>
+        
+          <% if (locals.forgotMessage || locals.ipMessage) { %>
+            <a
+            href="/login"
+            class="py-2 px-4 bg-white hover:text-white text-black rounded-md font-medium hover:bg-black shadow-white"
+            >Login</a
+          >
+          <% } %>
         </div>
       </nav>
 
@@ -91,6 +105,33 @@
               </button>
             </a>
             <% } %>
+
+            <% if (locals.forgotMessage) { %>
+              <h5 class="text-xl text-white"><%= forgotMessage %></h5>
+            <% } %>
+
+            <% if (locals.forgotSuccess) { %>
+              <h5 class="text-xl text-white"><%= forgotSuccess %></h5>
+              <a href="/login" class="flex justify-center">
+                <button
+                  class="resend-btn px-4 py-2 font-medium text-xl bg-white hover:bg-zinc-400 text-black rounded-md"
+                >
+                  Go Login Page
+                </button>
+              </a>
+            <% } %>
+
+            <% if (locals.ipMessage) { %>
+              <h5 class="text-xl text-white"><%= ipMessage %></h5>
+              <a href="/login" class="flex justify-center">
+                <button
+                  class="resend-btn px-4 py-2 font-medium text-xl bg-white hover:bg-zinc-400 text-black rounded-md"
+                >
+                  Go Login Page
+                </button>
+              </a>
+            <% } %>
+
           </div>
         </div>
       </div>

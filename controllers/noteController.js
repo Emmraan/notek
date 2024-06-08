@@ -71,18 +71,28 @@ const deleteNote = async (req, res) => {
   const noteId = req.params.noteId; 
 
   try {
-    
-   await Note.findOneAndDelete({ _id: noteId, user: userId }); 
+    // Delete the note
+    const note = await Note.findOneAndDelete({ _id: noteId, user: userId });
+
+    if (!note) {
+      return res.status(404).json({ message: "Note not found." });
+    }
+
+    // Remove the note ID from the user's notes field
+    await User.findByIdAndUpdate(
+      userId,
+      { $pull: { notes: noteId } },
+      { new: true }
+    );
 
     res.status(200).redirect("/");
 
   } catch (err) {
-
     console.error("Error deleting note:", err);
-
     res.status(500).json({ message: "Server error." });
   }
 };
+
 
 const allNotes = async (req, res, next) => {
   try {

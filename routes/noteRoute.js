@@ -1,6 +1,6 @@
 const express = require("express");
 const isLoggedIn = require("../middlewares/isLoggedIn");
-const userAuthen = require("../middlewares/userAuthen.js");
+const userAuthen = require("../middlewares/userAuthen");
 const { createNote,updateNote,deleteNote} = require("../controllers/exportAllControllers");
 
 const Router = express.Router();

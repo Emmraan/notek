@@ -35,12 +35,27 @@ const userSchema = new mongoose.Schema({
     type: Boolean, 
     default: false 
   },
+    
+  ip: {
+    type: String 
+   },
+  
+  resetPasswordToken: { 
+    type: String 
+  },
 
+  resetPasswordExpires: { 
+    type: Date 
+  },
+  lastEmailUpdate: {
+    type: Date
+  },
+  
   verificationToken: String,
 
   verificationTokenExpires: Date,
   
-  lastResend: Date 
+  lastResend: Date,
   
 }, {
   timestamps: true,

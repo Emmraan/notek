@@ -54,7 +54,7 @@
       <div class="user-container w-full h-[83vh] flex items-center justify-center mt-[6rem] sm:mt-[4rem]">
         <div class="form-div relative w-[40rem] h-[28rem] sm:h-[25rem] flex px-6 py-4 sm:py-0 items-center justify-center text-white bg-black rounded-md border">
             <form action="/user/update" method="post" class="flex flex-wrap justify-center gap-5 sm:gap-10">
-               
+              <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                 <input
                     type="text"
                     name="firstName"
@@ -91,8 +91,9 @@
                     placeholder="Enter your new password"
                     class="text-white font-medium bg-transparent outline-none rounded-md py-2 px-3 bg-zinc-900"
                 />
-                <button class="px-4 py-2 font-medium text-xl bg-white text-black rounded-md">Update</button>
-            </form>
+                <button type="submit" class="px-4 py-2 font-medium text-xl bg-white hover:bg-zinc-500 text-black rounded-md">Update</button>
+                <h5 class="text-[13px] sm:text-[14px] text-red-700"> <%= error %> </h5>       
+              </form>
         </div>
       </div>
     </div>

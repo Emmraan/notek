@@ -36,11 +36,16 @@ module.exports = function Middlewares(app) {
     resave: false,
     saveUninitialized: true,
     cookie: {
-      secure: true,
+      secure: false,
     }
   }));
 
   // Use CSRF protection
   app.use(lusca.csrf());
 
+  // Middleware to make the CSRF token available in all views where we use form !
+  app.use((req, res, next) => {
+    res.locals.csrfToken = req.csrfToken();
+    next();
+  });
 };

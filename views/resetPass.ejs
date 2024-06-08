@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Register</title>
+    <title>Reset Password</title>
     <link
       href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css"
       rel="stylesheet"
@@ -17,7 +17,7 @@
       class="main relative overflow-hidden w-full h-screen text-white bg-black z-50"
     >
       <nav
-        class="w-full fixed h-20 bg-blur flex px-6 items-center justify-between border-b border-zinc-900 z-50">
+        class="w-full fixed bg-blur h-20 flex px-6 items-center justify-between border-b border-zinc-900 z-50">
         <a href="/">
           <h1
             class="notek text-4xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-5xl 2xl:text-6xl font-medium text-pink-600 shadow-white"
@@ -39,55 +39,27 @@
       
       <div class="form-container w-full h-[83vh] flex  items-center justify-center mt-[4rem]">
 
-        <div class="form-div relative w-[40rem] h-[25rem] flex px-6 items-center justify-center text-white bg-black rounded-md border">
+        <div class="form-div relative w-[30rem] h-[25rem] flex px-6 items-center justify-center text-white bg-black rounded-md border">
 
-            <form action="/user/register" method="post" class="flex flex-wrap justify-center items-center mt-10 gap-6 sm:gap-10">
+            <form action="/user/reset-password?token=<%= token %>" method="post" class="flex flex-col justify-center gap-10">
+            <div class="pass mt-20">
             <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-            <input
-              type="text"
-              required="true"
-              name="firstName"
-              autocomplete="off"
-              placeholder="Enter your firstName"
-              class="text-white w-[12rem] sm:w-[14rem] py-1 sm:py-2 px-3 font-medium bg-transparent outline-none rounded-md 
-              bg-zinc-900 border-b-4 border-zinc-400"
-            />
-            
-            
-            <input
-              type="text"
-              name="lastName"
-              autocomplete="off"
-              placeholder="Enter your lastName"
-              class="text-white w-[12rem] sm:w-[14rem] py-1 sm:py-2 px-3 font-medium bg-transparent outline-none rounded-md bg-zinc-900 border-b-4 border-zinc-400"
-            />
-            
-           
-            <input
-              type="email"
-              required="true"
-              name="email"
-              autocomplete="off"
-              placeholder="Enter your Email"
-              class="text-white w-[12rem] sm:w-[14rem] py-1 sm:py-2 px-3 font-medium bg-transparent outline-none rounded-md 
-              bg-zinc-900 border-b-4 border-zinc-400"
-            />
-            
-            
-            <input
+
+            <h4 class="text-[15px] mb-2">Enter your new password</h4>
+            <input 
               type="password"
               required="true"
-              name="password"
-              placeholder="Enter your password"
+              name="newPassword"
+              placeholder="Enter your Password"
               class="text-white w-[12rem] sm:w-[14rem] py-1 sm:py-2 px-3 font-medium bg-transparent outline-none rounded-md 
               bg-zinc-900 border-b-4 border-zinc-400"
             />
-            <button class="px-10 py-2 text-[1rem] font-medium text-xl sm:text-[1.3rem] bg-white hover:bg-zinc-400 text-black rounded-md">Sign Up</button>
-            <div class="error w-full flex justify-center px-10">
-              <h5 class="text-[13px] sm:text-[14px] text-red-700"> <%= error %> </h5>
             </div>
+            <button type="submit" class="px-10 py-2 text-[1rem] font-medium text-xl sm:text-[1.3rem] bg-white hover:bg-zinc-400 text-black rounded-md">Reset</button>
+            <div class="error w-full flex justify-center px-10">
+            </div>
+          <h5 class="text-[13px] sm:text-[14px] text-red-700"> <%= error %> </h5>
           </form>
-
         </div>
 
       </div>

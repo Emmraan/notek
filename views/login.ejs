@@ -17,7 +17,7 @@
       class="main relative overflow-hidden w-full h-screen text-white bg-black z-50"
     >
       <nav
-        class="w-full fixed h-20 flex px-6 items-center justify-between border-b border-zinc-900 z-50">
+        class="w-full fixed bg-blur h-20 flex px-6 items-center justify-between border-b border-zinc-900 z-50">
         <a href="/">
           <h1
             class="notek text-4xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-5xl 2xl:text-6xl font-medium text-pink-600 shadow-white"
@@ -41,41 +41,63 @@
 
       <div class="form-container w-full h-[83vh] flex items-center justify-center mt-[4rem]">
 
-        <div class="form-div relative w-[40rem] h-[25rem] flex flex-col gap-6 px-6 items-center justify-center text-white bg-black rounded-md border">
+        <div class="login-form-div transition-1s opacity-1 pointer-events-all relative w-[40rem] h-[25rem] flex flex-col gap-6 px-6 items-center justify-center text-white bg-black rounded-md border">
 
-            <form action="/user/login" method="post" class="flex flex-col justify-center gap-8">
+          <form action="/user/login" method="post" class="flex flex-col justify-center gap-8">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
             <div class="email">
-            <h4 class="text-[15px] mb-2">Enter your Email</h4>
-            <input
-              type="email"
-              required="true"
-              name="email"
-              autocomplete="off"
-              placeholder="email"
-              class="text-white text-base font-medium bg-transparent outline-none border-b-4 border-zinc-400 rounded-md py-2 px-3
-              bg-zinc-900"
-            />
-            
+              <h4 class="text-[15px] mb-2">Enter your Email</h4>
+              <input
+                type="email"
+                required="true"
+                name="email"
+                autocomplete="off"
+                placeholder="email"
+                class="text-white text-base font-medium bg-transparent outline-none border-b-4 border-zinc-400 rounded-md py-2 px-3 bg-zinc-900"
+              />
             </div>
-
             <div class="pass">
               <h4 class="text-[15px] mb-2">Enter your password</h4>
-            <input
-              type="password"
-              required="true"
-              name="password"
-              placeholder="password"
-              class="text-white font-medium bg-transparent outline-none border-b-4 border-zinc-400 rounded-md py-2 px-3
-              bg-zinc-900"
-            />
+              <input
+                type="password"
+                required="true"
+                name="password"
+                placeholder="password"
+                class="text-white font-medium bg-transparent outline-none border-b-4 border-zinc-400 rounded-md py-2 px-3 bg-zinc-900"
+              />
+              <h4 class="forgot-btn text-[12px] font-medium text-pink-700 hover:text-pink-900  mt-2 cursor-pointer">forgot password ?</h4>
             </div>
-            <button class="px-2 py-1 font-medium text-xl bg-white hover:bg-zinc-400 text-black rounded-md">Login</button>
+            <button type="submit" class="px-2 py-1 font-medium text-xl bg-white hover:bg-zinc-400 text-black rounded-md">Login</button>
           </form>
+          
           <div class="error flex justify-center px-10">
             <h5 class="text-[13px] sm:text-[14px] text-red-700"> <%= error %> </h5>
           </div>
         </div>
 
+        <div class="reset-pass-form-div transition-1s absolute opacity-0 pointer-events-none  w-[40rem] h-[25rem] flex flex-col gap-6 px-6 items-center justify-center text-white bg-black rounded-md border">
+
+          <form action="/user/forgot-password" method="post" class="flex flex-col justify-center gap-8">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <div class="email">
+              <h4 class="text-[15px] mb-2">Enter your Email</h4>
+              <input
+                type="email"
+                required="true"
+                name="email"
+                autocomplete="off"
+                placeholder="email"
+                class="text-white text-base font-medium bg-transparent outline-none border-b-4 border-zinc-400 rounded-md py-2 px-3 bg-zinc-900"
+              />
+              <h4 class="login-btn text-[13px] font-medium text-pink-700 hover:text-pink-900 mt-2 cursor-pointer">want login ?</h4>
+            </div>
+            <button type="submit" class="px-2 py-1 font-medium text-xl bg-white hover:bg-zinc-400 text-black rounded-md">Send Rest Link</button>
+          </form>
+          
+          <div class="error flex justify-center px-10">
+            <h5 class="text-[13px] sm:text-[14px] text-red-700"> <%= error %> </h5>
+          </div>
+        </div>
       </div>
 
       <footer class="w-full relative h-14 flex gap-5 px-5 justify-center items-center">
