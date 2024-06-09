@@ -1,7 +1,7 @@
 const express = require("express");
 const isLoggedIn = require("../middlewares/isLoggedIn");
 const userAuthen = require("../middlewares/userAuthen");
-const { createUser, updateUser, loginUser, logoutUser, getUser,verifyIp } = require("../controllers/exportAllControllers");
+const { createUser, updateUser, loginUser, logoutUser, getUser,verifyLogin } = require("../controllers/exportAllControllers");
 const { verifyEmail, resendLink } = require("../controllers/signupController");
 const { forgotPassword, resetPassword } = require("../controllers/resetPassController.js")
 
@@ -15,7 +15,7 @@ Router.post("/register", createUser)
 
       .post("/login", loginUser)
 
-      .get("/verify-ip", verifyIp)
+      .get("/verify-login", verifyLogin)
 
       .post("/forgot-password", forgotPassword, (req,res) => {
         res.render("resetPass")

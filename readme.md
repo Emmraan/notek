@@ -26,13 +26,14 @@
 - Login: 🔑
 - Signup: ✍️
 - Email Verification: 📧
-- Many Checks During Signup: ✅
+- Many Checks During Signup and login: ✅
 
 ### Security
 - Protect Website from Disposable Email: 🚫✉️
 - Protect from (CSRF) Attack: 🛡️
 - Rate Limiting: ⏳
-- IP verification 🌐
+- New Login Verification: 🌐
+- Notes and password are Encrypted in DataBase: 🍃
 
 ### Account Recovery
 - Reset Password
@@ -41,13 +42,13 @@
 ## SOME  PREVIEWS 👁️
 
 ### HomeLogOut 🚪
-<img src="./public/images/preview1.png" alt="HomelogOut">
+<img src="./public/images/preview1.png" alt="HomelogOut" width="800px">
 
 ### Home Login Blank 🔲
-<img src="./public/images/preview2.png" alt="HomelogOut">
+<img src="./public/images/preview2.png" alt="HomelogOut" width="800px">
 
 ### Home Login 🔑 With Note 📝
-<img src="./public/images/preview3.png" alt="HomelogOut">
+<img src="./public/images/preview3.png" alt="HomelogOut" width="800px">
 
 <br/>
 
@@ -57,7 +58,7 @@
 ### First, go to the <a href="https://myaccount.google.com/security">Gmail Account Security Settings</a> In the search bar, type "app password" and follow the instructions to create an app password for your Gmail account then copy password and save it, This will be used for email verification.
 
 # App Password look Like:
-<img src="./public/images/appPass.png" alt="HomelogOut">
+<img src="./public/images/appPass.png" alt="appPass" width="500px">
 
 #### Note: 2-Step verification must be enabled on your Gmail account; otherwise, you will not be able to create an app password.
 
@@ -112,7 +113,7 @@ In the .env file, use the following format:
 // Replace the username password and Database name.
 1. MONGO_URI="mongodb+srv://<username>:<password>@cluster0.4m7l6.mongodb.net/<yourDBname>?retryWrites=true&w=majority&appName=Cluster0"
 
-// Generate or create a long hex secret for JWT_SECRET, e.g., 7f45d1f47ebf4e1af1e148cd00fe97e5472df8e5b5c8e8af
+// Generate or create a long hex secret for JWT_SECRET, SESSION_SECRET and NOTE_SECRET e.g., 7f45d1f47ebf4e1af1e148cd00fe97e5472df8e5b5c8e8af
 
 2. JWT_SECRET=your_jwt_seceret_here
 
@@ -128,6 +129,9 @@ In the .env file, use the following format:
 
 // session secrect same like jwt secrect
 7. SESSION_SECRET=your_session_seceret_here
+
+// NOTE secrect same like jwt and session secrect but make sure the length of NOTE_SECRET is 32 .
+8. NOTE_SECRET=your_session_seceret_here
 
 ```
 

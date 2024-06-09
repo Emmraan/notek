@@ -35,10 +35,6 @@ const userSchema = new mongoose.Schema({
     type: Boolean, 
     default: false 
   },
-    
-  ip: {
-    type: String 
-   },
   
   resetPasswordToken: { 
     type: String 

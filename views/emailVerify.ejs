@@ -20,6 +20,10 @@
           <title> <%= forgotMessage %> </title>
         <% } %>
 
+      <% if (locals.loginMessage) { %>
+          <title> <%= loginMessage %> </title>
+        <% } %>
+
     <link
       href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css"
       rel="stylesheet"
@@ -44,22 +48,22 @@
         </a>
 
         <div class="navlink flex gap-6">
-          <% if (!locals.forgotMessage) { %>
+          <% if (!locals.forgotMessage && !locals.loginMessage) { %>
             <a
-            href="/user/logout"
-            class="py-2 px-4 bg-white hover:text-white text-black rounded-md font-medium hover:bg-black shadow-white"
-            >Logout</a
-          >
-          <% } %>
-        
-          <% if (locals.forgotMessage || locals.ipMessage) { %>
+              href="/user/logout"
+              class="py-2 px-4 bg-white hover:text-white text-black rounded-md font-medium hover:bg-black shadow-white"
+            >
+              Logout
+            </a>
+          <% } else { %>
             <a
-            href="/login"
-            class="py-2 px-4 bg-white hover:text-white text-black rounded-md font-medium hover:bg-black shadow-white"
-            >Login</a
-          >
+              href="/login"
+              class="py-2 px-4 bg-white hover:text-white text-black rounded-md font-medium hover:bg-black shadow-white"
+            >
+              Login
+            </a>
           <% } %>
-        </div>
+        </div>        
       </nav>
 
       <div
@@ -108,6 +112,18 @@
 
             <% if (locals.forgotMessage) { %>
               <h5 class="text-xl text-white"><%= forgotMessage %></h5>
+            <% } %>
+
+            <% if (locals.loginMessage) { %>
+              <h5 class="text-xl text-white"><%= loginMessage %></h5>
+            <% } %>
+
+            <% if (locals.redirectUrl) { %>
+              <script>
+                setTimeout(() => {
+                  window.location.href = "<%= redirectUrl %>";
+                }, 3000);
+              </script>
             <% } %>
 
             <% if (locals.forgotSuccess) { %>

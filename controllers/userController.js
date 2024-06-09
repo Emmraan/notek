@@ -32,7 +32,7 @@ const updateUser = async (req, res) => {
 const loginUser = async (req, res) => {
   const hostDomain = process.env.DOMAIN;
   const { email, password } = req.body;
-  const userIp = req.socket.remoteAddress || '';
+  const userIp = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
 
   if (!email || !password) {
     return res.status(400).redirect("/login?error=Email and password are required.");
@@ -50,81 +50,90 @@ const loginUser = async (req, res) => {
       return res.status(401).redirect("/login?error=Email or password are incorrect.");
     }
 
-    // New IP detected, trigger verification
-    if (user.ip !== userIp) {
-      const verificationToken = crypto.randomBytes(32).toString('hex');
-      const verificationTokenExpires = Date.now() + 3600000; // 1 hour
-      user.verificationToken = verificationToken;
-      user.verificationTokenExpires = verificationTokenExpires;
-      user.ip = userIp; // Update the IP field with the new IP
-      await user.save();
-
-      // Send verification email
-      const transporter = nodemailer.createTransport({
-        service: 'Gmail',
-        auth: {
-          user: process.env.USER,
-          pass: process.env.PASS
-        }
+    // Check if verification token already exists
+    if (user.verificationToken) {
+      return res.status(200).render("emailVerify", {
+        loginMessage: "New Login Detected! Check your email for New Login Verification Link."
       });
-
-      const verificationUrl = `${hostDomain}/user/verify-ip?token=${verificationToken}`;
-
-      const mailOptions = {
-        from: process.env.USER,
-        to: user.email,
-        subject: 'Security Alert!',
-        text: `New sign-in detected with IP: ${userIp}. If this was not you, change your password immediately. If this was you, please verify your new IP address by copying and pasting the following link into your browser: ${verificationUrl}`
-      };
-
-      await transporter.sendMail(mailOptions);
-
-      return res.status(200).redirect("/login?error=New IP detected! Check your email for an IP verification link.");
-    } else {
-      // IP is the same
-      const token = jwt.sign({ id: user._id, email: user.email }, process.env.JWT_SECRET);
-
-      res.cookie('authen', token, {
-        httpOnly: true,
-        secure: true,
-        expires: new Date(Date.now() + 6 * 30 * 24 * 60 * 60 * 1000), // 6 months
-        sameSite: 'strict'
-      });
-
-      return res.redirect("/");
     }
+
+    // New IP detected, trigger verification
+    const verificationToken = crypto.randomBytes(32).toString('hex');
+    const verificationTokenExpires = Date.now() + 3600000; // 1 hour
+    user.verificationToken = verificationToken;
+    user.verificationTokenExpires = verificationTokenExpires;
+    await user.save();
+
+    // Send verification email
+    const transporter = nodemailer.createTransport({
+      service: 'Gmail',
+      auth: {
+        user: process.env.USER,
+        pass: process.env.PASS
+      }
+    });
+
+    const verificationUrl = `${hostDomain}/user/verify-login?token=${verificationToken}`;
+
+    const mailOptions = {
+      from: process.env.USER,
+      to: user.email,
+      subject: 'Security Alert!',
+      text: `New sign-in detected with IP: ${userIp} If this was not you, change your password immediately. If this was you, please verify your new login by copying and pasting the following link into your browser: ${verificationUrl}`
+    };
+
+    await transporter.sendMail(mailOptions);
+
+    return res.status(200).render("emailVerify", {
+      loginMessage: "New Login Detected! Check your email for New Login Verification Link."
+    });
+
   } catch (err) {
     console.error("Error:", err);
     return res.status(500).redirect("/login?error=Server error.");
   }
 };
 
-
-const verifyIp = async (req,res) => {
+const verifyLogin = async (req, res) => {
   const { token } = req.query;
-  const userIp = req.headers['x-forwarded-for'] || req.ip;
 
-  const user = await User.findOne({
-    verificationToken: { $eq: token },
-    verificationTokenExpires: { $gt: Date.now() }
-  });
-
-  if (!user) {
-    return res.status(200).render("emailVerify",{
-      ipMessage: "Invalid or expired verification token"
+  try {
+    const user = await User.findOne({
+      verificationToken: { $eq: token },
+      verificationTokenExpires: { $gt: Date.now() }
     });
+
+    if (!user) {
+      return res.status(200).render("emailVerify", {
+        ipMessage: "Invalid or expired Login verification token"
+      });
+    }
+
+    user.verificationToken = undefined;
+    user.verificationTokenExpires = undefined;
+    await user.save();
+
+    // Create a JWT token
+    const jwtToken = jwt.sign({ id: user._id, email: user.email }, process.env.JWT_SECRET);
+
+    res.cookie("authen", jwtToken, {
+      httpOnly: true,
+      secure: true,
+      expires: new Date(Date.now() + 10 * 365 * 24 * 60 * 60 * 1000),
+      sameSite: "strict",
+    });
+
+    // Render the verification success page with a client-side redirect script
+    res.status(200).render("emailVerify", {
+      loginMessage: "Your New Login Verified Successfully. Redirecting to Home...",
+      redirectUrl: "/"
+    });
+  } catch (err) {
+    console.error("Error:", err);
+    return res.status(500).redirect("/login?error=Server error.");
   }
+};
 
-  // Update IP and clear verification token
-  user.ip = userIp;
-  user.verificationToken = null;
-  user.verificationTokenExpires = null;
-  await user.save();
-
-  res.status(200).render("emailVerify",{
-    ipMessage: "Your IP Verified Successful"
-  });
-}
 
 const logoutUser = async (req, res) => {
   try {
@@ -166,5 +175,5 @@ module.exports = {
   loginUser,
   logoutUser,
   getUser,
-  verifyIp
+  verifyLogin
 };

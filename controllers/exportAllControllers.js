@@ -1,4 +1,4 @@
-const { createUser,updateUser, loginUser,logoutUser,getUser,verifyIp } = require("./userController");
+const { createUser,updateUser, loginUser,logoutUser,getUser,verifyLogin } = require("./userController");
 const { createNote,updateNote,deleteNote,allNotes } = require("./noteController");
 
 module.exports = {
@@ -11,5 +11,5 @@ module.exports = {
   updateNote,
   deleteNote,
   allNotes,
-  verifyIp,
+  verifyLogin,
 };
