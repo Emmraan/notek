@@ -15,20 +15,20 @@ const userAuthen = async (req, res, next) => {
     }
 
     if (!token) {
-      return res.status(401).render("homeLogOut");
+      return res.render("homeLogOut");
     }
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     const user = await User.findById(decoded.id);
 
     if (!user) {
-      return res.status(401).render("homeLogOut");
+      return res.render("homeLogOut");
     }
 
     req.user = user; 
 
     if (!user.isVerified) {
-      return res.status(401).render("emailVerify", {
+      return res.render("emailVerify", {
         error: "Your email is not verified. Please check your email for the verification link.",
         message: null
       });
@@ -37,7 +37,7 @@ const userAuthen = async (req, res, next) => {
     next();
   } catch (err) {
     console.error('Token verification error:', err.message);
-    return res.status(401).render("homeLogOut");
+    return res.render("homeLogOut");
   }
 };
 

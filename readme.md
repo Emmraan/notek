@@ -160,10 +160,10 @@ npm run watch:css
 docker build -t your-app-name .
 
 # Run Docker container for development
-docker run -d -p 3000:3000 --env-file .env --name your-container-name your-app-name npm run dev
+docker run -d -p 3000:3000 --env-file .env --name your-container-name -e NODE_ENV=development your-app-name
 
 # Or, run Docker container for production
-docker run -d -p 3000:3000 --env-file .env --name your-container-name your-app-name npm run start
+docker run -d -p 3000:3000 --env-file .env --name your-container-name -e NODE_ENV=production your-app-name
 
 # To stop the container
 docker stop your-container-name
