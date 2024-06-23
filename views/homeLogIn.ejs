@@ -20,7 +20,7 @@
         class="w-full bg-blur fixed h-20 flex px-6 items-center justify-between border-b border-zinc-900  z-50">
         <a href="/">
           <h1
-            class="notek text-4xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-5xl 2xl:text-6xl font-medium text-pink-600 shadow-white"
+            class="notek text-4xl sm:text-[3rem] font-medium text-pink-600 shadow-white"
           >
             Notek
           </h1>
@@ -31,13 +31,13 @@
         </div>
         
         <div class="user-icon select-none sm:flex hidden w-[2.6rem] h-[2.6rem] text-black hover:text-white hover:bg-black items-center justify-center font-bold bg-white rounded-full shadow-white cursor-pointer">
-          <%= user.firstName.charAt(0).toUpperCase() + user.lastName.charAt(0).toUpperCase() %>
+          <%= user.firstName.charAt(0).toUpperCase() + (user.lastName ? user.lastName.charAt(0).toUpperCase() : '') %>
         </div>
         
       
       </nav>
       
-      <div class="menu-list border border-zinc-700 bg-blur transition-1s select-none flex flex-col gap-2 absolute w-44 h-64 rounded-md top-[5%] -right-[100%] py-20 justify-start z-20">
+      <div class="menu-list items-start border border-zinc-700 bg-blur transition-1s select-none flex flex-col gap-2 absolute w-44 h-64 rounded-md top-[5%] -right-[100%] py-20 z-20">
         <a
           href="/user/account"
           class="py-2 px-4 text-xl underline text-white rounded-sm font-medium"
@@ -46,10 +46,10 @@
         <div class="note-btn-1 sm:hidden w-[3rem] h-[3rem] sm:w-[2.8rem] sm:h-[2.8rem] flex items-center justify-center rounded-full bg-white hover:bg-black  hover:text-white text-black boxs absolute bottom-5 right-10 sm:bottom-3  shadow-white cursor-pointer">
           <h1 class="text-3xl sm:text-2xl font-bold"><i class="ri-add-fill"></i></h1>
           </div>
-        <a
+        <button
           
           class="logout py-2 px-4 text-xl underline text-white rounded-sm font-medium cursor-pointer"
-          >LogOut</a
+          >LogOut</button
         >
       </div>
 
@@ -152,7 +152,7 @@
     
       <div class="note-div scroll-w-0 flex flex-wrap gap-10 sm:gap-[7rem] justify-center w-full h-[93vh] overflow-y-auto py-[7rem] sm:px-0 z-10">
 
-          <% if (notes.length === 0) { %>
+          <% if (locals.notes.length === 0) { %>
               <h1 class="text-2xl font-bold text-zinc-600 absolute top-[50%] sm:left-[40%] left-[20%]">You have no any notes!</h1>
           <% } %>
           

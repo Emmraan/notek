@@ -300,7 +300,7 @@ function logOutUser () {
     return null;
   }
   logOut.addEventListener("click", () => {
-    logOut.setAttribute('href', 'user/logout');
+    window.location.href = '/user/logout';
   });
 }
 logOutUser();
@@ -337,3 +337,101 @@ function loginAndForgotForm () {
 }
 
 loginAndForgotForm();
+
+
+function normalAndAuth0LoginForm () {
+  const loginForm = document.querySelector(".login-form-div");
+  const auth0Form = document.querySelector(".auth0-login-form-div");
+
+   const otherOptions = document.querySelector(".other-option");
+   const emailPass = document.querySelector(".email-pass-options");
+
+   if (!otherOptions || !emailPass) {
+    return null;
+  }
+
+   otherOptions.addEventListener("click", () => {
+    loginForm.style.opacity = 0;
+    loginForm.style.pointerEvents = "none";
+    loginForm.style.position = "absolute";
+    auth0Form.style.opacity = 1;
+    auth0Form.style.pointerEvents = "all";
+    auth0Form.style.position = "relative";
+   });
+
+   emailPass.addEventListener("click", () => {
+    auth0Form.style.opacity = 0;
+    auth0Form.style.pointerEvents = "none";
+    auth0Form.style.position = "absolute";
+    loginForm.style.opacity = 1;
+    loginForm.style.pointerEvents = "all";
+    loginForm.style.position = "relative";
+   });
+}
+normalAndAuth0LoginForm();
+
+function normalAndAuth0SignupForm () {
+  const signupForm = document.querySelector(".signup-form-div")
+  const auth0Form = document.querySelector(".auth0-signup-form-div")
+
+
+  const otherOptions = document.querySelector(".other-option");
+  const signupOps = document.querySelector(".signup-option");
+
+  if (!otherOptions || !signupOps) {
+   return null;
+ }
+
+  otherOptions.addEventListener("click", () => {
+   signupForm.style.opacity = 0;
+   signupForm.style.pointerEvents = "none";
+   signupForm.style.position = "absolute";
+   auth0Form.style.opacity = 1;
+   auth0Form.style.pointerEvents = "all";
+   auth0Form.style.position = "relative";
+  });
+
+  signupOps.addEventListener("click", () => {
+   auth0Form.style.opacity = 0;
+   auth0Form.style.pointerEvents = "none";
+   auth0Form.style.position = "absolute";
+   signupForm.style.opacity = 1;
+   signupForm.style.pointerEvents = "all";
+   signupForm.style.position = "relative";
+  });
+}
+normalAndAuth0SignupForm();
+
+function oauthSignupLogin() {
+  const googleBtn = document.querySelectorAll(".google");
+  const githubBtn = document.querySelectorAll(".github");
+  const microsoftBtn = document.querySelectorAll(".microsoft");
+  const discordBtn = document.querySelectorAll(".discord");
+
+  if (!googleBtn || !githubBtn || !microsoftBtn || !discordBtn) {
+    return null;
+  }
+  googleBtn.forEach( (btns) =>{
+    btns.addEventListener("click", () => {
+      window.location.href = '/auth/google';
+    });
+  });
+  githubBtn.forEach( (btns) =>{
+    btns.addEventListener("click", () => {
+      window.location.href = '/auth/github';
+    });
+  });
+  microsoftBtn.forEach( (btns) =>{
+    btns.addEventListener("click", () => {
+      window.location.href = '/auth/microsoft';
+    });
+  });
+  discordBtn.forEach( (btns) =>{
+    btns.addEventListener("click", () => {
+      window.location.href = '/auth/discord';
+    });
+  });
+
+}
+
+oauthSignupLogin();

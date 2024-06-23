@@ -24,8 +24,12 @@ const updateChecks = async (req, res) => {
       return res.status(404).redirect(`/user/account?error=User not found`);
     }
 
+
     // Check if email update is allowed
     if (email && email !== user.email) {
+      if (user.userFrom === 'sso') {
+        return res.status(404).redirect(`/user/account?error=You cannot change your Email !`);
+      }
       const lastEmailUpdate = user.lastEmailUpdate || 0;
       const currentTime = Date.now();
       const timeSinceLastUpdate = currentTime - lastEmailUpdate;
@@ -36,18 +40,19 @@ const updateChecks = async (req, res) => {
         const remainingDays = Math.ceil(remainingTime / (24 * 60 * 60 * 1000));
         return res.status(400).redirect(`/user/account?error=You can only update your email once every 14 days. Please try again in ${remainingDays} days.`);
       }
+
+      const acceptedDomains = ["gmail.com", "hotmail.com", "outlook.com", "yahoo.com"];
+      const getEmailDomain = (email) => {
+        return email.substring(email.lastIndexOf("@") + 1);
+      }
+
+      const domain = getEmailDomain(email);
+      if (!acceptedDomains.includes(domain)) {
+        return res.status(400).redirect(`/user/account?error=We accept emails only from these domains: ${acceptedDomains.join(", ")}`);
+      }
     }
 
-    const acceptedDomains = ["gmail.com", "hotmail.com", "outlook.com", "yahoo.com"];
-    const getEmailDomain = (email) => {
-      return email.substring(email.lastIndexOf("@") + 1);
-    }
-
-    const domain = getEmailDomain(email);
-    if (!acceptedDomains.includes(domain)) {
-      return res.status(400).redirect(`/user/account?error=We accept emails only from these domains: ${acceptedDomains.join(", ")}`);
-    }
-
+    
     if (email && email !== user.email) {
       const existingEmail = await User.findOne({ email: { $eq: email } });
       if (existingEmail) {
@@ -72,7 +77,7 @@ const updateChecks = async (req, res) => {
         return res.status(400).redirect("/user/account?error=Current password is required to set a new password");
       }
 
-      const isMatch = await bcrypt.compare(current_password, user.password);
+      const isMatch = bcrypt.compare(current_password, user.password);
       if (!isMatch) {
         return res.status(400).redirect("/user/account?error=Current password is incorrect");
       }

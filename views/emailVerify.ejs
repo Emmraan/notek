@@ -49,12 +49,12 @@
 
         <div class="navlink flex gap-6">
           <% if (!locals.forgotMessage && !locals.loginMessage) { %>
-            <a
+            <button
               href="/user/logout"
               class="py-2 px-4 bg-white hover:text-white text-black rounded-md font-medium hover:bg-black shadow-white"
             >
               Logout
-            </a>
+            </button>
           <% } else { %>
             <a
               href="/login"
@@ -108,6 +108,11 @@
                 Go Home
               </button>
             </a>
+            <script>
+              setTimeout(() => {
+                window.location.href = "<%= redirectUrl %>";
+              }, 3000);
+            </script>
             <% } %>
 
             <% if (locals.forgotMessage) { %>

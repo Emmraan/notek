@@ -3,6 +3,7 @@ const path = require("path");
 const cookieParser = require('cookie-parser');
 const RateLimit = require("express-rate-limit");
 const session = require('express-session');
+const passport = require('passport');
 const lusca = require('lusca');
 
 // Define middleware functions
@@ -39,13 +40,16 @@ module.exports = function Middlewares(app) {
       secure:false,
     }
   }));
+  app.use(passport.initialize());
 
-  // Use CSRF protection
-  app.use(lusca.csrf());
+   // Conditional CSRF middleware
+   app.use(lusca.csrf());
 
-  // Middleware to make the CSRF token available in all views where we use form !
+  // Middleware to make the CSRF token available in all views where we use form
   app.use((req, res, next) => {
-    res.locals.csrfToken = req.csrfToken();
+    if (req.csrfToken) {
+      res.locals.csrfToken = req.csrfToken();
+    }
     next();
   });
 };

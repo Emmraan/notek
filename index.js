@@ -4,8 +4,7 @@ const connectDB = require('./config/database');
 const Middlewares = require("./middlewares/middlewares");
 const isLoggedOut = require("./middlewares/isLoggedOut");
 const home = require("./routes/homeRoute")
-const {userRoute,noteRoute,} = require("./routes/exports.AllRoutes");
-const route404 =require("./routes/404Route")
+const { userRoute,noteRoute,ssoRoute,route404 } = require("./routes/exports.AllRoutes");
 const PORT = process.env.PORT || 8080;
 
 
@@ -26,9 +25,8 @@ Middlewares(app);
 app.use("/", home);
 
 app.get("/login", isLoggedOut, (req, res) => {
-    const csrfToken = req.csrfToken(); // Generate CSRF token
     const error = req.query.error || null;
-    res.render("login", { error:error, csrfToken:csrfToken });
+    res.render("login", { error });
   });
 
 app.get("/register", isLoggedOut, (req, res) => {
@@ -36,6 +34,7 @@ app.get("/register", isLoggedOut, (req, res) => {
     res.render("register", { error });
 });
 
+app.use('/auth', ssoRoute);
 
 app.use("/user", userRoute);
 

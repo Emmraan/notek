@@ -19,7 +19,6 @@ const signUpChecks = async (req, res) => {
   try {
 
     const { firstName, lastName, email, password } = req.body;
-    const userIp = req.headers['x-forwarded-for'] || req.ip;
 
     if (!firstName || !lastName || !email || !password) {
 
@@ -75,11 +74,11 @@ const signUpChecks = async (req, res) => {
       lastName,
       email,
       password: hashedPassword,
-      ip: userIp,
       verificationToken,
       verificationTokenExpires,
     });
-
+    
+    newUser.userFrom = "default";
     const user = await newUser.save();
 
     const verificationLink = `${hostDomain}/user/verify-email?token=${verificationToken}`;
@@ -240,7 +239,7 @@ const verifyEmail = async (req, res) => {
 
     await user.save();
 
-    return res.status(401).render("emailVerify", {
+    return res.status(201).render("emailVerify", {
       redirectMessage: "Your Email verify successfully !",
       error: null,
       message:null
