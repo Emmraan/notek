@@ -39,7 +39,7 @@
       
       <div class="form-container w-full h-[83vh] flex  items-center justify-center mt-[4rem]">
 
-        <div class="form-div relative w-[40rem] h-[25rem] flex px-6 items-center justify-center text-white bg-black rounded-md border">
+        <div class="signup-form-div relative transition-1s opacity-1 pointer-events-all w-[40rem] h-[25rem] flex px-6 items-center justify-center text-white bg-black rounded-md border">
 
             <form action="/user/register" method="post" class="flex flex-wrap justify-center items-center mt-10 gap-6 sm:gap-10">
             <input type="hidden" name="_csrf" value="<%= csrfToken %>">
@@ -83,11 +83,24 @@
               bg-zinc-900 border-b-4 border-zinc-400"
             />
             <button class="px-10 py-2 text-[1rem] font-medium text-xl sm:text-[1.3rem] bg-white hover:bg-zinc-400 text-black rounded-md">Sign Up</button>
+            <h5 class="text-[12px] font-medium">OR</h5>
+            <h5 class="text-[13px] other-option font-medium text-pink-700 hover:text-pink-900 cursor-pointer">Other-Options</h5>
             <div class="error w-full flex justify-center px-10">
               <h5 class="text-[13px] sm:text-[14px] text-red-700"> <%= error %> </h5>
             </div>
           </form>
 
+        </div>
+        
+        <div class="auth0-signup-form-div absolute transition-1s opacity-0 pointer-events-none w-[40rem] h-[25rem] flex flex-col gap-6 px-6 items-center justify-center text-white bg-black rounded-md border">
+          <div class="other-login-options sm:flex flex-col hidden gap-4">
+            <button class="google flex gap-2 items-center px-2 py-2 bg-white text-black rounded-md font-medium hover:bg-zinc-400 cursor-pointer"><i class="ri-google-fill text-xl"></i>  Continue with Google</button>
+            <button class="github flex gap-2 items-center px-2 py-2 bg-white text-black rounded-md font-medium hover:bg-zinc-400 cursor-pointer"><i class="ri-github-fill text-xl"></i>  Continue with Github</button>
+            <button class="microsoft flex gap-2 items-center px-2 py-2 bg-white text-black rounded-md font-medium hover:bg-zinc-400 cursor-pointer"><i class="ri-microsoft-fill text-xl"></i>  Continue with Microsoft</button>
+            <button class="discord flex gap-2 items-center px-2 py-2 bg-white text-black rounded-md font-medium hover:bg-zinc-400 cursor-pointer"><i class="ri-discord-fill text-xl"></i>  Continue with Discord</button>
+          </div>
+          <h5 class="font-medium ">OR</h5>
+          <h5 class="signup-option text-[13px] text-pink-600 hover:text-pink-800 cursor-pointer">SignUp Form</h5>
         </div>
 
       </div>

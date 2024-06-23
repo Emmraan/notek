@@ -19,5 +19,4 @@ RUN npm run build
 EXPOSE 3000
 
 # Command to run the application
-# Use environment variable to determine the command to run
-CMD ["sh", "-c", "if [ \"$NODE_ENV\" = \"development\" ]; then npm run dev; else npm run start; fi"]
+CMD ["npm","start"]

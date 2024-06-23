@@ -29,7 +29,7 @@
         <div class="navlink flex gap-6"> 
           <a
             href="/register"
-            class="py-2 px-4 bg-white hover:text-white text-black rounded-md font-medium hover:bg-black shadow-white"
+            class="py-2 px-4 font-medium bg-white  shadow-white  text-black rounded-md  hover:text-white hover:bg-black"
             >Sign up</a
           >
         </div>
@@ -39,11 +39,11 @@
       <div class="head-gradient absolute top-[38%] left-[0%] sm:left-[24%]  w-[50rem] h-[10rem] rounded-full -z-10"></div>
       
 
-      <div class="form-container w-full h-[83vh] flex items-center justify-center mt-[4rem]">
+      <div class="form-container w-full h-[83vh] flex flex-col items-center justify-center mt-[4rem]">
 
-        <div class="login-form-div transition-1s opacity-1 pointer-events-all relative w-[40rem] h-[25rem] flex flex-col gap-6 px-6 items-center justify-center text-white bg-black rounded-md border">
+        <div class="login-form-div transition-1s opacity-1 pointer-events-all relative w-[40rem] h-[25rem] px-10 gap-6 flex sm:flex-row flex-col items-center justify-center sm:justify-around text-white bg-black rounded-md border">
 
-          <form action="/user/login" method="post" class="flex flex-col justify-center gap-8">
+          <form action="/user/login" method="post" class="flex flex-col justify-center gap-4">
             <input type="hidden" name="_csrf" value="<%= csrfToken %>">
             <div class="email">
               <h4 class="text-[15px] mb-2">Enter your Email</h4>
@@ -68,10 +68,31 @@
               <h4 class="forgot-btn text-[12px] font-medium text-pink-700 hover:text-pink-900  mt-2 cursor-pointer">forgot password ?</h4>
             </div>
             <button type="submit" class="px-2 py-1 font-medium text-xl bg-white hover:bg-zinc-400 text-black rounded-md">Login</button>
-          </form>
-          
+            </form>
+            <h5 class="text-[12px] font-medium">OR</h5>
+            <h5 class="text-[13px] sm:hidden other-option font-medium text-pink-700 hover:text-pink-900">Other-Options</h5>
+            <div class="other-login-options sm:flex flex-col hidden gap-4">
+                <button class="google flex gap-2 items-center px-2 py-2 bg-white text-black rounded-md font-medium hover:bg-zinc-400 cursor-pointer"><i class="ri-google-fill text-xl"></i>  Continue with Google</button>
+                <button class="github flex gap-2 items-center px-2 py-2 bg-white text-black rounded-md font-medium hover:bg-zinc-400 cursor-pointer"><i class="ri-github-fill text-xl"></i>  Continue with Github</button>
+                <button class="microsoft flex gap-2 items-center px-2 py-2 bg-white text-black rounded-md font-medium hover:bg-zinc-400 cursor-pointer"><i class="ri-microsoft-fill text-xl"></i>  Continue with Microsoft</button>
+                <button class="discord flex gap-2 items-center px-2 py-2 bg-white text-black rounded-md font-medium hover:bg-zinc-400 cursor-pointer"><i class="ri-discord-fill text-xl"></i>  Continue with Discord</button>
+              </div>
+          </div>
+              
           <div class="error flex justify-center px-10">
             <h5 class="text-[13px] sm:text-[14px] text-red-700"> <%= error %> </h5>
+        </div>
+
+        <div class="auth0-login-form-div sm:hidden transition-1s absolute opacity-0 pointer-events-none w-[40rem] h-[25rem] flex flex-col gap-6 px-6 items-center justify-center text-white bg-black rounded-md border">
+          <div class="other-login-options flex flex-col gap-4">
+            <button class="google flex gap-2 items-center px-2 py-2 bg-white text-black rounded-md font-medium hover:bg-zinc-400 cursor-pointer"><i class="ri-google-fill text-xl"></i>  Continue with Google</button>
+            <button class="github flex gap-2 items-center px-2 py-2 bg-white text-black rounded-md font-medium hover:bg-zinc-400 cursor-pointer"><i class="ri-github-fill text-xl"></i>  Continue with Github</button>
+            <button class="microsoft flex gap-2 items-center px-2 py-2 bg-white text-black rounded-md font-medium hover:bg-zinc-400 cursor-pointer"><i class="ri-microsoft-fill text-xl"></i>  Continue with Microsoft</button>
+            <button class="discord flex gap-2 items-center px-2 py-2 bg-white text-black rounded-md font-medium hover:bg-zinc-400 cursor-pointer"><i class="ri-discord-fill text-xl"></i>  Continue with Discord</button>
+          </div>
+          <h5 class="font-medium ">OR</h5>
+          <div class="email-pass-options  flex flex-col justify-center">
+            <h5 class="text-[13px] text-pink-600 hover:text-pink-800">Email and Password</h5>
           </div>
         </div>
 
