@@ -37,13 +37,13 @@
 ## SOME  PREVIEWS 👁️
 
 ### HomeLogOut 🚪
-<img src="./public/images/preview1.png" alt="HomelogOut" width="1080px" height="450">
+<img src="./public/images/preview1.png" alt="HomelogOut" width="1080px">
 
 ### Home Login Blank 🔲
-<img src="./public/images/preview2.png" alt="HomelogOut" width="1080px" height="450">
+<img src="./public/images/preview2.png" alt="HomelogOut" width="1080px">
 
 ### Home Login 🔑 With Note 📝
-<img src="./public/images/preview3.png" alt="HomelogOut" width="1080px" height="450">
+<img src="./public/images/preview3.png" alt="HomelogOut" width="1080px">
 
 <br/>
 
@@ -181,6 +181,14 @@ docker build -t your-image-name .
 # Run Docker container for development
 docker run -d -p 3000:3000 --name your-container-name your-image-name
 
+# Now for Run the container without `TypeError: OAuth2Strategy requires a clientID option` error we have required to copy .env file in docker container
+docker cp `/path/your/.env/file` <container-name>:/app/.env
+or
+docker cp `/path/your/.env/file` <container-id>:/app/.env
+
+## Now Restart The Container
+docker restart <your-container-name> or <your-container_id>
+
 # To stop the container
 docker stop your-container-name
 
@@ -213,7 +221,7 @@ docker pull emmraan/notek:`<version>`  (e.g., 2.2.2)
 docker run -d -p 3000:3000 --name `your-container-name` emmraan/notek
 ```
 
-## Now for Run the container without `MongoUrI` error we have required to copy .env file in docker container
+## Now for Run the container without `TypeError: OAuth2Strategy requires a clientID option` error we have required to copy .env file in docker container
 ```
 docker cp `/path/your/.env/file` <container-name>:/app/.env
 or
